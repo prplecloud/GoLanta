@@ -1,7 +1,7 @@
 package backend
 
 type Personnage struct {
-	Id             int    `json: "id"`
+	ID             int    `json: "ID"`
 	Nom            string `json: "nom"`
 	Sexe           string `json: "sexe"`
 	CouleurCheveux string `json: "couleurcheveux"`
