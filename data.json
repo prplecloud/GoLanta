@@ -5,33 +5,5 @@
         "Sexe": "homme",
         "CouleurCheveux": "",
         "Equipe": "rouge"
-    },
-    {
-        "Id": 0,
-        "Nom": "ezaezaeaeza",
-        "Sexe": "homme",
-        "CouleurCheveux": "",
-        "Equipe": "jaune"
-    },
-    {
-        "Id": 0,
-        "Nom": "eeeeeeeeeeeeeeeeee",
-        "Sexe": "homme",
-        "CouleurCheveux": "brun",
-        "Equipe": "rouge"
-    },
-    {
-        "Id": 0,
-        "Nom": "yyy",
-        "Sexe": "homme",
-        "CouleurCheveux": "brun",
-        "Equipe": "rouge"
-    },
-    {
-        "Id": 0,
-        "Nom": "e",
-        "Sexe": "homme",
-        "CouleurCheveux": "brun",
-        "Equipe": "rouge"
     }
 ]
