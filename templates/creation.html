@@ -1,0 +1,40 @@
+{{define "creation"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création Personnage</title>
+    <link href="static/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    
+<form action="/treatment" method="post">
+
+    <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="sexe">Sexe :</label>
+        <select id="sexe" name="sexe">
+            <option value="homme">Homme</option>
+            <option value="femme">Femme</option>
+        </select>
+
+        <label for="couleurcheveux">Couleur de cheveux :</label>
+        <select id="couleurcheveux" name="couleurcheveux">
+            <option value="brun">Brun</option>
+            <option value="blond">Blond</option>
+            <option value="noir">Noir</option>
+        </select>
+        
+        <label for="equipe">Equipe :</label>
+        <select id="equipe" name="equipe">
+            <option value="rouge">Rouge</option>
+            <option value="jaune">Jaune</option>
+        </select>        
+
+        <input type="submit" value="Soumettre">
+</form>
+</body>
+</html>
+{{end}}
