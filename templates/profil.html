@@ -5,13 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link href="static/css/style.css" rel="stylesheet" />
+    <link href="static/css/profil.css" rel="stylesheet" />
 </head>
+<header>
+    <p>website</p>
+</header>
 <body>
     {{range .}}
-    <p>{{.Nom}}</p>
-    <p>{{.Equipe}}</p>
+        {{.Nom}}
+        {{.Equipe}}
 {{end}}
+   
+ <div class="supp">
+        <form action="/delete" method="post" onsubmit="return confirmDelete()">
+            <input type="hidden" name="article_id" value="{{ .Id }}">
+            <input type="submit" class="delete-button" value="Supprimer">
+        </form>
+    </div>
+
+    <div class="modify">
+        <form action="/modify" method="post" onsubmit="return confirmDelete()">
+            <input type="hidden" name="character" value="{{ .Personnage }}">
+            <input type="submit" class="modify-button" value="Modifier">
+        </form>
+    </div>
+
 </body>
+<footer>
+<p>github</p>
+</footer>
 </html>
 {{end}}

@@ -2,10 +2,13 @@ package backend
 
 import (
 	"encoding/json"
+	"log"
 	"math/rand"
 	"os"
 	"time"
 )
+
+var jsonfile = "data.json"
 
 func LoadChara() ([]Personnage, error) {
 
@@ -26,29 +29,34 @@ func LoadChara() ([]Personnage, error) {
 	return forms, nil
 }
 
-func GenerateID() int {
+func GenerateRandomNumber() int {
 	rand.Seed(time.Now().UnixNano())
-	return rand.Intn(9000) + 1000
+	return rand.Intn(90000) + 10000
 }
 
-func CharaID(filePath string) ([]int, error) {
-
-	charaID := []int{}
-
-	fileContent, err := os.ReadFile(filePath)
+func ModifyChara(updatedChara Personnage) error {
+	character, err := LoadChara()
 	if err != nil {
-		return nil, err
+		log.Fatal("log: retrieveArticles() error!\n", err)
+	}
+	for i, chara := range character {
+		if chara.ID == updatedChara.ID {
+			character[i] = updatedChara
+		}
+	}
+	ChangeChara(character)
+	return nil
+}
+
+func ChangeChara(character []Personnage) {
+
+	data, errJSON := json.Marshal(character)
+	if errJSON != nil {
+		log.Fatal("log: addArticle()\t JSON Marshall error!\n", errJSON)
 	}
 
-	var character []Personnage
-
-	err = json.Unmarshal(fileContent, &character)
-	if err != nil {
-		return nil, err
+	errWrite := os.WriteFile(jsonfile, data, 0666)
+	if errWrite != nil {
+		log.Fatal("log: addArticle()\t WriteFile error!\n", errWrite)
 	}
-
-	for _, chara := range character {
-		charaID = append(charaID, chara.ID)
-	}
-	return charaID, nil
 }

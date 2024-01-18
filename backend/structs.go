@@ -7,3 +7,5 @@ type Personnage struct {
 	CouleurCheveux string `json: "couleurcheveux"`
 	Equipe         string `json: "equipe"`
 }
+
+var Chara []Personnage

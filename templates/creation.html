@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création Personnage</title>
-    <link href="static/css/style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="static/script.js"></script>
 </head>
 <body>
-    
-<form action="/treatment" method="post">
+    <div class="form">
+<form onsubmit="return confirmerSoumission();" action="/treatment" method="post">
 
     <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required>
@@ -33,8 +34,9 @@
             <option value="jaune">Jaune</option>
         </select>        
 
-        <input type="submit" value="Soumettre">
-</form>
+        <input type="submit" value="Valider">
+            </form>
+        </div>
 </body>
 </html>
 {{end}}
