@@ -16,11 +16,18 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func Profil(w http.ResponseWriter, r *http.Request) {
-	templates.Temp.ExecuteTemplate(w, "profil", nil)
+	backend.Chara, _ = backend.LoadChara()
+	fmt.Println(backend.Chara)
+	fmt.Println(len(backend.Chara))
+	templates.Temp.ExecuteTemplate(w, "profil", backend.Chara)
 }
 
 func Creation(w http.ResponseWriter, r *http.Request) {
 	templates.Temp.ExecuteTemplate(w, "creation", nil)
+}
+
+func Modify(w http.ResponseWriter, r *http.Request) {
+	templates.Temp.ExecuteTemplate(w, "modify", nil)
 }
 
 func FormSubmission(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +42,6 @@ func FormSubmission(w http.ResponseWriter, r *http.Request) {
 
 	id := backend.GenerateRandomNumber()
 
-	// Créer une nouvelle instance de Form à partir des données du formulaire
 	form := backend.Personnage{
 		ID:             id,
 		Nom:            r.FormValue("nom"),
@@ -50,7 +56,6 @@ func FormSubmission(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Ajouter la nouvelle forme à la liste
 	dataForms = append(dataForms, form)
 
 	dataWrite, errWrite := json.Marshal(dataForms)
@@ -85,7 +90,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		deleteIDStr := r.FormValue("ID")
+		deleteIDStr := r.FormValue("article_id")
 		if deleteIDStr == "" {
 			http.Error(w, "ID ne peut pas être une chaîne vide", http.StatusBadRequest)
 			return
@@ -97,10 +102,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if deleteID >= 0 && deleteID < len(backend.Chara) {
-			backend.Chara = append(backend.Chara[:deleteID], backend.Chara[deleteID+1:]...)
-			backend.LoadChara()
-		}
+		backend.RemoveCharater(deleteID)
 	}
 
 	http.Redirect(w, r, "http://localhost:8080/profil", http.StatusSeeOther)
@@ -108,21 +110,15 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 func ModifyCharaHandler(w http.ResponseWriter, r *http.Request) {
 
-	var updatedChara backend.Personnage
+	r.ParseForm()
 
-	decoder := json.NewDecoder(r.Body)
-	err := decoder.Decode(&updatedChara)
-	if err != nil {
-		http.Error(w, "Format JSON invalide", http.StatusBadRequest)
-		return
-	}
+	CharaId := r.FormValue("character")
+	CharaIdInt, _ := strconv.Atoi(CharaId)
+	updatedChara := backend.GetCharacter(CharaIdInt)
 
-	// Mettre à jour le personnage
-	err = backend.ModifyChara(updatedChara)
-	if err != nil {
-		http.Error(w, "Erreur de modification du personnage", http.StatusInternalServerError)
-		return
-	}
+	fmt.Println(updatedChara.Nom)
 
 	w.WriteHeader(http.StatusOK)
+
+	templates.Temp.ExecuteTemplate(w, "http://localhost:8080/modify", backend.Chara)
 }

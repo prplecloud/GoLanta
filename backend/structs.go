@@ -8,4 +8,8 @@ type Personnage struct {
 	Equipe         string `json: "equipe"`
 }
 
+type CharaData struct {
+	Charakter []Personnage `json: "charakter"`
+}
+
 var Chara []Personnage

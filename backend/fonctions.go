@@ -2,7 +2,6 @@ package backend
 
 import (
 	"encoding/json"
-	"log"
 	"math/rand"
 	"os"
 	"time"
@@ -30,33 +29,63 @@ func LoadChara() ([]Personnage, error) {
 }
 
 func GenerateRandomNumber() int {
+
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(90000) + 10000
 }
 
 func ModifyChara(updatedChara Personnage) error {
+
 	character, err := LoadChara()
 	if err != nil {
-		log.Fatal("log: retrieveArticles() error!\n", err)
+		return err
 	}
+
 	for i, chara := range character {
 		if chara.ID == updatedChara.ID {
 			character[i] = updatedChara
 		}
 	}
-	ChangeChara(character)
+
+	if err := ChangeChara(character); err != nil {
+		return err
+	}
+
 	return nil
 }
 
-func ChangeChara(character []Personnage) {
+func ChangeChara(character []Personnage) error {
 
-	data, errJSON := json.Marshal(character)
-	if errJSON != nil {
-		log.Fatal("log: addArticle()\t JSON Marshall error!\n", errJSON)
+	data, err := json.MarshalIndent(character, "   ", " ")
+	if err != nil {
+		return err
 	}
 
-	errWrite := os.WriteFile(jsonfile, data, 0666)
-	if errWrite != nil {
-		log.Fatal("log: addArticle()\t WriteFile error!\n", errWrite)
+	err = os.WriteFile(jsonfile, data, 0666)
+	if err != nil {
+		return err
 	}
+
+	return nil
+}
+
+func RemoveCharater(id int) {
+	var new []Personnage
+	for _, i := range Chara {
+		if i.ID != id {
+			new = append(new, i)
+		}
+	}
+	Chara = new
+	ChangeChara(Chara)
+}
+
+func GetCharacter(id int) Personnage {
+	Chara, _ := LoadChara()
+	for _, i := range Chara {
+		if i.ID == id {
+			return i
+		}
+	}
+	return Chara[0]
 }
