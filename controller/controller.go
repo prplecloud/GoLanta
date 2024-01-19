@@ -120,5 +120,7 @@ func ModifyCharaHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	templates.Temp.ExecuteTemplate(w, "http://localhost:8080/modify", backend.Chara)
+	fmt.Println("crampté")
+	templates.Temp.ExecuteTemplate(w, "modify", backend.Chara)
+
 }
