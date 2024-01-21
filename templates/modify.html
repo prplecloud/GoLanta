@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modify</title>
+    <link href="static/css/style.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="form">
-        <form onsubmit="return confirmerSoumission();" action="/modify" method="post">
-        
+        <div class="back">
+        <form action="/modify" method="post">
+        <h1>Modifiez votre personnage</h1>
             <label for="nom">Nom :</label>
                 <input type="text" id="nom" name="nom" required>
         
@@ -35,6 +37,7 @@
                 <input type="submit" value="Valider">
                     </form>
                 </div>
+            </div>
 </body>
 </html>
 {{end}}

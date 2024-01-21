@@ -13,7 +13,6 @@ func Initserv() {
 
 	http.HandleFunc("/creation", controller.Creation)
 	http.HandleFunc("/profil", controller.Profil)
-	http.HandleFunc("/home", controller.Home)
 	http.HandleFunc("/treatment", controller.FormSubmission)
 	http.HandleFunc("/delete", controller.Delete)
 	http.HandleFunc("/modify", controller.ModifyCharaHandler)

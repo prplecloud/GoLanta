@@ -1,8 +1,27 @@
+@font-face {
+    font-family: 'Beachday';
+    src: url('static/font/beachday.ttf');
+}
+
 body {
-background: center / 100% url('../images/bateau.jpg') no-repeat;
+    background: center / 100% url('../images/back.jpeg') no-repeat;
+}
+
+h1 {
+    font-family: 'Beachday';
+    display: flex;
+    justify-content: center;
 }
 
 p {
+    font-family: 'Beachday';
+    color: white;
+}
 
-    color : blue
+.back {
+    color: white;
+    border-radius: 20px;
+    border: 3px solid #D6CABA;
+    background-color: #D6CABA;
+
 }

@@ -6,6 +6,7 @@ type Personnage struct {
 	Sexe           string `json: "sexe"`
 	CouleurCheveux string `json: "couleurcheveux"`
 	Equipe         string `json: "equipe"`
+	Image          string `json: "image"`
 }
 
 type CharaData struct {

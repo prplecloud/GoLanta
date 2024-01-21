@@ -11,10 +11,6 @@ import (
 	"strconv"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	templates.Temp.ExecuteTemplate(w, "home", nil)
-}
-
 func Profil(w http.ResponseWriter, r *http.Request) {
 	backend.Chara, _ = backend.LoadChara()
 	fmt.Println(backend.Chara)
@@ -98,7 +94,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 		deleteID, err := strconv.Atoi(deleteIDStr)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Erreur conversion string to int : %s", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Erreur de conversion string to int : %s", err), http.StatusInternalServerError)
 			return
 		}
 
@@ -121,6 +117,12 @@ func ModifyCharaHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	fmt.Println("crampté")
-	templates.Temp.ExecuteTemplate(w, "modify", backend.Chara)
 
+	err := templates.Temp.ExecuteTemplate(w, "modify", backend.Chara)
+	if err != nil {
+		http.Error(w, "Erreur d'affichage du template", http.StatusInternalServerError)
+		return
+	}
+
+	http.Redirect(w, r, "http://localhost:8080/profil", http.StatusSeeOther)
 }

@@ -1,38 +1,41 @@
 {{define "profil"}}
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link href="static/css/profil.css" rel="stylesheet" />
+    <script src="static/script.js"></script>
+
 </head>
-<header>
-    <p>website</p>
-</header>
+<body>    
+    <h1>Liste des Personnages</h1>
+    <div class="back">
+        {{range .}}
+        <p>{{.Nom}}</p>
+        <p>{{.Sexe}}</p>
+        <p>{{.CouleurCheveux}}</p>
+        <p>{{.Equipe}}</p>
+        <img id="characterImage" src="/static/images/{{.Image}}" alt="Character Image">
 
-<body>
-    <h1>fgjhfghcth</h1>
-    {{range .}}
-    <h2>{{.Nom}}</h2>
-    <div class="supp">
-        <form action="/delete" method="post" onsubmit="return confirmDelete()">
-            <input type="hidden" name="article_id" value="{{ .ID }}">
-            <input type="submit" class="delete-button" value="Supprimer">
-        </form>
-    </div>
+        <div class="supp">
+            <form action="/delete" method="post">
+                <input type="hidden" name="article_id" value="{{ .ID }}">
+                <input type="submit" class="delete-button" value="Supprimer">
+            </form>
+        </div>
 
-    <div class="modify">
-        <form action="/modify" method="post" onsubmit="return confirmDelete()">
-            <input type="hidden" name="character" value="{{ .ID }}">
-            <input type="submit" class="modify-button" value="Modifier">
-        </form>
+        <div class="modify">
+            <form action="/modify" method="post">
+                <input type="hidden" name="character" value="{{ .ID }}">
+                <input type="submit" class="modify-button" value="Modifier">
+            </form>
+        </div>
     </div>
     {{end}}
 
 </body>
-<footer>
-    <p>github</p>
-</footer>
 
 </html>
 {{end}}

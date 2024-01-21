@@ -1,9 +1,0 @@
-@font-face {
-    font-family: 'Ironsides';
-    src: url('../font/SF Ironsides.ttf') format('truetype');
-}
-
-p {
-    font-family: 'Ironsides';
-    color:black;
-}
